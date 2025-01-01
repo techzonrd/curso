@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso por Código</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        .container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ingreso por Código</h1>
+        <form id="codeForm">
+            <label for="code">Código de Ingreso:</label>
+            <input type="text" id="code" name="code" placeholder="Ingresa tu código" required>
+
+            <input type="submit" value="Ingresar">
+        </form>
+
+        <p class="error" id="errorMessage" style="display: none;">Código incorrecto. Intenta nuevamente.</p>
+    </div>
+
+    <script>
+        // Lista de usuarios registrados con sus códigos
+        const registeredUsers = {
+            "Juan Pérez": "12345",
+            "Ana López": "67890",
+            "Carlos García": "54321"
+        };
+
+        const codeForm = document.getElementById('codeForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        codeForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const code = document.getElementById('code').value;
+
+            // Verificar si el código ingresado corresponde a un usuario registrado
+            const userExists = Object.values(registeredUsers).includes(code);
+
+            if (userExists) {
+                window.location.href = "curso.html"; // Redirige a la página curso.html
+            } else {
+                errorMessage.style.display = 'block';
+                setTimeout(() => errorMessage.style.display = 'none', 2000);
+            }
+
+            codeForm.reset();
+        });
+    </script>
+</body>
+</html>
